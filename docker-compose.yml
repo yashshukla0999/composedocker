@@ -2,7 +2,7 @@ version: '3'
 
 services:
   mysql:
-    container_name: mysqlcontainer2
+    container_name: mysqlcontainer3
     image: mysql:latest
     environment:
       MYSQL_ROOT_PASSWORD: root
@@ -11,14 +11,14 @@ services:
       MYSQL_PASSWORD: root
 
   spring-boot-app:
-    container_name: spring-container2
+    container_name: spring-container3
     image: spring-boot-app:latest
     ports:
       - "8080:8080"
     depends_on:
       - mysql
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysqlcontainer1:3306/docker 
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysqlcontainer3:3306/docker 
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: root
 
@@ -30,4 +30,4 @@ services:
     depends_on:
       - spring-boot-app
     environment:
-      REACT_APP_API_URL: http://spring-container1:8080
+      REACT_APP_API_URL: http://spring-container3:8080
