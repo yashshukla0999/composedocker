@@ -2,7 +2,7 @@ version: '3'
 
 services:
   mysql:
-    container_name: mysqlcontainer1
+    container_name: mysqlcontainer2
     image: mysql:latest
     environment:
       MYSQL_ROOT_PASSWORD: root
@@ -11,7 +11,7 @@ services:
       MYSQL_PASSWORD: root
 
   spring-boot-app:
-    container_name: spring-container1
+    container_name: spring-container2
     image: spring-boot-app:latest
     ports:
       - "8080:8080"
