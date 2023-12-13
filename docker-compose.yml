@@ -2,7 +2,7 @@ version: '3'
 
 services:
   mysql:
-    container_name: mysqlcontainerr
+    container_name: mysqlcontainerrr
     image: mysql:latest
     environment:
       MYSQL_ROOT_PASSWORD: root
@@ -18,7 +18,7 @@ services:
     depends_on:
       - mysql
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysqlcontainerr:3306/docker 
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysqlcontainerrr:3306/docker 
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: 
 
