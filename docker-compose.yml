@@ -11,7 +11,7 @@ services:
       MYSQL_PASSWORD: root
 
   spring-boot-app:
-    container_name: spring-container
+    container_name: spring-containerr
     image: spring-boot-app:latest
     ports:
       - "8080:8080"
@@ -30,4 +30,4 @@ services:
     depends_on:
       - spring-boot-app
     environment:
-      REACT_APP_API_URL: http://spring-container:8080
+      REACT_APP_API_URL: http://spring-containerr:8080
