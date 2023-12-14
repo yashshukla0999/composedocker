@@ -11,6 +11,8 @@ services:
       MYSQL_DATABASE: docker
       MYSQL_USER: root
       MYSQL_PASSWORD: 1234
+    networks:
+      - mynetwork
 
   spring-boot-app:
     container_name: spring-container2
@@ -22,7 +24,9 @@ services:
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysqlcontainer2:3306/docker 
       SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: 1234 
+      SPRING_DATASOURCE_PASSWORD: 1234
+    networks:
+      - mynetwork
 
   react-app:
     container_name: react-container
@@ -33,3 +37,8 @@ services:
       - spring-boot-app
     environment:
       REACT_APP_API_URL: http://spring-container2:8080
+    networks:
+      - mynetwork
+
+networks:
+  mynetwork:
