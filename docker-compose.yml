@@ -20,7 +20,7 @@ services:
     depends_on:
       - mysql
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-container2:3306/docker 
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-container2:3306/docker?useSSL=false&allowPublicKeyRetrieval=true
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: 1234
       DATABASE_DRIVER: com.mysql.cj.jdbc.Driver
