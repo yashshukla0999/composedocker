@@ -1,43 +1,30 @@
 version: '3'
 services:
   mysql:
-    container_name: mysql-container2
-    image: mysql:latest
+    image: mysql:8.0
     ports:
       - "3306:3306"
     environment:
-      MYSQL_DATABASE: docker
+      MYSQL_ROOT_PASSWORD: P@ssw0rd
       MYSQL_USER: root
       MYSQL_PASSWORD: 1234
-    networks:
-      - networkmysql
+      MYSQL_DATABASE: docker
 
-  spring-boot-app:
-    container_name: spring-container2
-    image: spring-docker:latest
-    ports:
-      - "8080:8080"
-    depends_on:
-      - mysql
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-container2:3306/docker?useSSL=false&allowPublicKeyRetrieval=true
-      SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: 1234
-      DATABASE_DRIVER: com.mysql.cj.jdbc.Driver
-    networks:
-      - networkmysql
-
+  spring-boot-app1:
+      build:
+        context: ./spring-boot-app
+        dockerfile: Dockerfile
+      ports:
+        - "8080:8080"
+      depends_on:
+        - mysql
+      environment:
+        SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/docker
+        SPRING_DATASOURCE_USERNAME: root
+        SPRING_DATASOURCE_PASSWORD: 1234
   react-app:
-    container_name: react-container
-    image: react-docker1:dev
-    ports:
-      - "3000:3000"
-    depends_on:
-      - spring-boot-app
-    environment:
-      REACT_APP_API_URL: http://spring-container2:8080
-    networks:
-      - networkmysql
-
-networks:
-  networkmysql:
+      build:
+        context: ./sshkey
+        dockerfile: Dockerfile
+      ports:
+        - "3000:3000"
