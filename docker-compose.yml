@@ -4,6 +4,8 @@ services:
   mysql:
     container_name: mysqlcontainer2
     image: mysql:latest
+    ports:
+      -"3306:3306"
     environment:
       MYSQL_ROOT_PASSWORD: 1234
       MYSQL_DATABASE: docker
@@ -28,6 +30,6 @@ services:
     ports:
       - "3000:3000"
     depends_on:
-      - spring-docker
+      - spring-boot-app
     environment:
       REACT_APP_API_URL: http://spring-container2:8080
