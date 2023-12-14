@@ -39,5 +39,5 @@ services:
       - networkmysql
 
 networks:
-  mynetwork:
+  networkmysql:
 
