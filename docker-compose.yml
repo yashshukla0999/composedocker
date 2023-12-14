@@ -1,108 +1,44 @@
-# version: '3'
-
-# services:
-#   mysql:
-#     container_name: mysqlcontainer2
-#     image: mysql:latest
-#     ports:
-#       - "3306:3306"
-#     environment:
-#       MYSQL_ROOT_PASSWORD: 1234
-#       MYSQL_DATABASE: docker
-#       MYSQL_USER: root
-#       MYSQL_PASSWORD: 1234
-#     networks:
-#       - mynetwork
-
-#   spring-boot-app:
-#     container_name: spring-container2
-#     image: spring-docker:latest
-#     ports:
-#       - "8080:8080"
-#     depends_on:
-#       - mysql
-#     environment:
-#       SPRING_DATASOURCE_URL: jdbc:mysql://mysqlcontainer2:3306/docker 
-#       SPRING_DATASOURCE_USERNAME: root
-#       SPRING_DATASOURCE_PASSWORD: 1234
-#     networks:
-#       - mynetwork
-
-#   react-app:
-#     container_name: react-container
-#     image: react-docker1:dev
-#     ports:
-#       - "3000:3000"
-#     depends_on:
-#       - spring-boot-app
-#     environment:
-#       REACT_APP_API_URL: http://spring-container2:8080
-#     networks:
-#       - mynetwork
-
-# networks:
-#   mynetwork:
-
-
-
-
-
-
-
-
-
-
-
-
-version: '3.8'
-
+version: '3'
 services:
-  # Spring Boot App
-  spring-app:
-    image: spring-docker:latest
-    container_name: spring-app
-    working_dir: /app
-    volumes:
-      - ./spring-app:/app
-    ports:
-      - "8080:8080"
-    command: ["./mvnw", "spring-boot:run"]
-    depends_on:
-      - mysql-db
-    networks:
-      - mynetwork
-    
-
-  # MySQL Database
-  mysql-db:
+  mysql:
+    container_name: mysqlcontainer2
     image: mysql:latest
-    container_name: mysql-db
-    volumes:
-      - ./mysql-data:/var/lib/mysql
+    ports:
+      - "3306:3306"
     environment:
       MYSQL_ROOT_PASSWORD: 1234
       MYSQL_DATABASE: docker
       MYSQL_USER: root
       MYSQL_PASSWORD: 1234
-    ports:
-      - "3306:3306"
     networks:
       - mynetwork
 
-  # React App
+  spring-boot-app:
+    container_name: spring-container2
+    image: spring-docker:latest
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysqlcontainer2:3306/docker 
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: 1234
+    networks:
+      - mynetwork
+
   react-app:
+    container_name: react-container
     image: react-docker1:dev
-    container_name: react-app
-    working_dir: /app
-    volumes:
-      - ./react-app:/app
     ports:
       - "3000:3000"
-    command: ["npm", "start"]
     depends_on:
-      - spring-app
+      - spring-boot-app
+    environment:
+      REACT_APP_API_URL: http://spring-container2:8080
     networks:
       - mynetwork
 
 networks:
   mynetwork:
+
