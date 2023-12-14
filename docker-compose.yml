@@ -1,7 +1,7 @@
 version: '3'
 services:
   mysql:
-    container_name: mysqlcontainer2
+    container_name: mysql-container2
     image: mysql:latest
     ports:
       - "3306:3306"
@@ -40,4 +40,3 @@ services:
 
 networks:
   networkmysql:
-
