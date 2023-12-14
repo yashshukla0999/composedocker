@@ -10,7 +10,7 @@ services:
       MYSQL_USER: root
       MYSQL_PASSWORD: 1234
     networks:
-      - mynetwork
+      - networkmysql
 
   spring-boot-app:
     container_name: spring-container2
@@ -24,7 +24,7 @@ services:
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: 1234
     networks:
-      - mynetwork
+      - networkmysql
 
   react-app:
     container_name: react-container
@@ -36,7 +36,7 @@ services:
     environment:
       REACT_APP_API_URL: http://spring-container2:8080
     networks:
-      - mynetwork
+      - networkmysql
 
 networks:
   mynetwork:
