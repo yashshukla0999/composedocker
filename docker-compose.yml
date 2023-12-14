@@ -5,7 +5,7 @@ services:
     container_name: mysqlcontainer2
     image: mysql:latest
     ports:
-      -"3306:3306"
+      - "3306:3306"
     environment:
       MYSQL_ROOT_PASSWORD: 1234
       MYSQL_DATABASE: docker
